@@ -1,9 +1,19 @@
+using FutureManagmentSystemApi.DataBase;
+using FutureManagmentSystemApi.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped(typeof(IMasterService<>),typeof(MasterService<>)); 
+builder.Services.AddDbContext<ContextClass>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("connect"));
+});
 
 var app = builder.Build();
 
@@ -12,6 +22,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.MapControllers();
 }
 
 var summaries = new[]
