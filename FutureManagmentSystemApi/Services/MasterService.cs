@@ -68,7 +68,8 @@ namespace FutureManagmentSystemApi.Services
 
         public async Task Update(T item)
         {
-            throw new NotImplementedException();
+            Table.Update(item);
+            await context.SaveChangesAsync();
         }
     }
 }

@@ -15,7 +15,8 @@ namespace FutureManagmentSystemApi.Controllers.V1
         {
             this.master = master;
         }
-        [HttpGet("PostData")]
+        [HttpGet("GetData")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Admission>))]
         public async Task<IActionResult> GetDate()
         {
             try
@@ -29,12 +30,13 @@ namespace FutureManagmentSystemApi.Controllers.V1
             }
         }
         [HttpPost("PostData")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Admission))]
         public async Task<IActionResult> PostData(Admission data)
         {
             try
             {
                 await master.AddData(data);
-                return Ok("Data posted succesfully");
+                return Ok(data);
             }
             catch (Exception ex)
             {
@@ -49,6 +51,22 @@ namespace FutureManagmentSystemApi.Controllers.V1
             {
                 await master.Delete(id);
                 return Ok("Deleted succesfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        
+        [HttpPut("UpdateData")]
+        public async Task<IActionResult> UpdateData(Admission data)
+        {
+            try
+            {
+                await master.Update(data);
+                return Ok("Data updated succesfully");
             }
             catch (Exception ex)
             {
