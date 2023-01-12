@@ -1,4 +1,6 @@
-﻿using FutureManagmentSystemApi.Models.Bussiness;
+﻿using AutoMapper;
+using FutureManagmentSystemApi.Models.Bussiness;
+using FutureManagmentSystemApi.Models.Dtos;
 using FutureManagmentSystemApi.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +12,11 @@ namespace FutureManagmentSystemApi.Controllers.V1
     public class AdmissionController : ControllerBase
     {
         private readonly IMasterService<Admission> master;
+        private readonly IMapper mapper;
 
-        public AdmissionController(IMasterService<Admission> master)
+        public AdmissionController(IMasterService<Admission> master, IMapper mapper)
         {
+            this.mapper = mapper;
             this.master = master;
         }
         [HttpGet("GetData")]
@@ -31,11 +35,12 @@ namespace FutureManagmentSystemApi.Controllers.V1
         }
         [HttpPost("PostData")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Admission))]
-        public async Task<IActionResult> PostData(Admission data)
+        public async Task<IActionResult> PostData(AdmissionDto data)
         {
             try
             {
-                await master.AddData(data);
+                var result =  mapper.Map<Admission>(data);
+                await master.AddData(result);
                 return Ok(data);
             }
             catch (Exception ex)

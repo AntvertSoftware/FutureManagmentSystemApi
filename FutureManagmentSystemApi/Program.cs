@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped(typeof(IMasterService<>),typeof(MasterService<>)); 
 builder.Services.AddDbContext<ContextClass>(option =>
 {
