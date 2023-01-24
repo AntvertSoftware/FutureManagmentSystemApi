@@ -10,6 +10,8 @@ namespace FutureManagmentSystemApi.Helpers
         {
                      
                 CreateMap<Admission, AdmissionDto>().ReverseMap();
+            CreateMap<State, StateDto>().ReverseMap();  
+            CreateMap<City,CityDto>().ReverseMap();
             
         }
     }

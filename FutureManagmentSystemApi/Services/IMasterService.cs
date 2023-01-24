@@ -1,4 +1,6 @@
-﻿namespace FutureManagmentSystemApi.Services
+﻿using FutureManagmentSystemApi.Models.Bussiness;
+
+namespace FutureManagmentSystemApi.Services
 {
     public interface IMasterService<T>
     {

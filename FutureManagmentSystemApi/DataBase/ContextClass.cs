@@ -9,5 +9,7 @@ namespace FutureManagmentSystemApi.DataBase
         {
         }
         public DbSet<Admission> Admission { get; set; }
+        public DbSet<State> States { get; set; }
+        public DbSet<City> Cities { get; set; }
     }
 }

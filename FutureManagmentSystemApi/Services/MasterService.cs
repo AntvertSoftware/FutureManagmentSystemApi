@@ -1,4 +1,5 @@
 ﻿using FutureManagmentSystemApi.DataBase;
+using FutureManagmentSystemApi.Models.Bussiness;
 using Microsoft.EntityFrameworkCore;
 
 namespace FutureManagmentSystemApi.Services
@@ -65,6 +66,8 @@ namespace FutureManagmentSystemApi.Services
                 throw new Exception(ex.Message);
             }
         }
+
+       
 
         public async Task Update(T item)
         {
